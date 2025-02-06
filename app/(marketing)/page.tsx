@@ -8,6 +8,8 @@ import {
   Phone,
 } from "lucide-react";
 
+import { pricingPlans } from "@/data/price";
+
 const LandingPage = () => {
   const features = [
     {
@@ -27,21 +29,6 @@ const LandingPage = () => {
       title: "オンライン販売も対応",
       description:
         "イベント前の予約販売や、イベント後のフォローアップセールスもカバー",
-    },
-  ];
-
-  const pricingPlans = [
-    {
-      name: "イベントプラン",
-      price: "0",
-      period: "固定費0円",
-      features: [
-        "決済手数料3.6%",
-        "在庫管理機能",
-        "売上レポート",
-        "スマホ決済対応",
-        "チャットサポート",
-      ],
     },
   ];
 
@@ -179,11 +166,11 @@ const LandingPage = () => {
             </div>
             <div className="flex items-center justify-end">
               <Phone className="w-5 h-5 mr-2" />
-              <span>サポート: 0120-xxx-xxx</span>
+              <span>サポート: 090-4189-2872</span>
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 byPay. All rights reserved.</p>
+            <p>&copy; 2025 byPay. All rights reserved.</p>
           </div>
         </div>
       </footer>
