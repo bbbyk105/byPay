@@ -1,3 +1,4 @@
+"use client";
 import {
   ArrowRight,
   CheckCircle,
@@ -10,33 +11,48 @@ import {
 import { pricingPlans } from "@/data/price";
 import Header from "@/components/header";
 import { features } from "@/data/features";
+import PaymentForm from "@/components/payment-form";
 
 const LandingPage = () => {
   return (
     <div className="min-h-screen">
       <Header />
       {/* ヒーローセクション - pt-20を追加してヘッダーの高さ分を確保 */}
-      <div className="bg-gradient-to-r from-purple-600 to-blue-400 text-white pt-20">
-        <div className="container mx-auto px-6 py-24">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              マルシェ・展示会の
-              <br />
-              決済をもっとカンタンに
-            </h1>
-            <p className="text-xl mb-8">
-              月額費用0円・最短即日導入で、
-              <br />
-              キャッシュレス決済をスタート
-            </p>
-            <button className="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-colors flex items-center mx-auto">
-              無料デモを試す
-              <ArrowRight className="ml-2" />
-            </button>
+      <div className="bg-gradient-to-r from-purple-600 to-blue-400 text-white pt-20 overflow-hidden relative">
+        {/* 背景の装飾 */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-1/2 -right-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="container mx-auto px-6 py-24 relative">
+          <div className="grid md:grid-cols-2 items-center gap-12">
+            {/* 左側のテキストコンテンツ */}
+            <div className="text-center md:text-left relative z-10">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                マルシェ・展示会の
+                <br />
+                決済をもっとカンタンに
+              </h1>
+              <p className="text-xl mb-8">
+                月額費用0円・最短即日導入で、
+                <br />
+                キャッシュレス決済をスタート
+              </p>
+              <button className="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-colors flex items-center md:mx-0 mx-auto">
+                無料デモを試す
+                <ArrowRight className="ml-2" />
+              </button>
+            </div>
+
+            {/* 右側の決済画面モックアップ */}
+            <div className="relative">
+              <PaymentForm />
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[90%] h-2 bg-black/5 blur-md rounded-full"></div>
+            </div>
           </div>
         </div>
       </div>
-
       {/* 特徴セクション */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
