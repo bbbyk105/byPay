@@ -36,8 +36,8 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      {/* ヒーローセクション */}
-      <div className="bg-gradient-to-r from-purple-600 to-blue-400 text-white">
+      {/* ヒーローセクション - pt-20を追加してヘッダーの高さ分を確保 */}
+      <div className="bg-gradient-to-r from-purple-600 to-blue-400 text-white pt-20">
         <div className="container mx-auto px-6 py-24">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
