@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 
 import { pricingPlans } from "@/data/price";
+import Header from "@/components/header";
 
 const LandingPage = () => {
   const features = [
@@ -34,8 +35,9 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen">
+      <Header />
       {/* ヒーローセクション */}
-      <header className="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
+      <div className="bg-gradient-to-r from-purple-600 to-blue-400 text-white">
         <div className="container mx-auto px-6 py-24">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -54,7 +56,7 @@ const LandingPage = () => {
             </button>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* 特徴セクション */}
       <section className="py-24 bg-gray-50">
@@ -80,7 +82,7 @@ const LandingPage = () => {
           <h2 className="text-3xl font-bold text-center mb-16">
             シンプルな料金体系
           </h2>
-          <div className="max-w-md mx-auto">
+          <div className="max-w-md mx-auto flex flex-col">
             {pricingPlans.map((plan, index) => (
               <div
                 key={index}
