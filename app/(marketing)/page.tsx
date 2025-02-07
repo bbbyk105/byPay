@@ -5,18 +5,15 @@ import {
   CreditCard,
   Package,
   Settings,
-  Phone,
 } from "lucide-react";
 
 import { pricingPlans } from "@/data/price";
-import Header from "@/components/header";
 import { features } from "@/data/features";
 import PaymentForm from "@/components/payment-form";
 
 const LandingPage = () => {
   return (
     <div className="min-h-screen">
-      <Header />
       {/* ヒーローセクション - pt-20を追加してヘッダーの高さ分を確保 */}
       <div className="bg-gradient-to-r from-purple-600 to-blue-400 text-white pt-20 overflow-hidden relative">
         {/* 背景の装飾 */}
@@ -35,12 +32,12 @@ const LandingPage = () => {
                 決済をもっとカンタンに
               </h1>
               <p className="text-xl mb-8">
-                月額費用0円・最短即日導入で、
-                <br />
-                キャッシュレス決済をスタート
+                月額費用0円、最短即日導入 <br />
+                キャッシュレス決済を即実現 <br />
+                サイトは自由にカスタマイズ可能
               </p>
               <button className="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-colors flex items-center md:mx-0 mx-auto">
-                無料デモを試す
+                テンプレートを見る
                 <ArrowRight className="ml-2" />
               </button>
             </div>
@@ -139,7 +136,7 @@ const LandingPage = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-blue-600 text-white">
+      <section className="py-24 bg-gradient-to-r from-teal-600 to-blue-400 text-white">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-8">
             まずは無料デモでお試しください
@@ -150,27 +147,6 @@ const LandingPage = () => {
           </button>
         </div>
       </section>
-
-      {/* フッター */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">byPay</h3>
-              <p className="text-gray-400">
-                マルシェ・展示会向けキャッシュレス決済サービス
-              </p>
-            </div>
-            <div className="flex items-center justify-end">
-              <Phone className="w-5 h-5 mr-2" />
-              <span>サポート: 090-4189-2872</span>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 byPay. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

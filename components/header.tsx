@@ -6,7 +6,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // スクロール検知
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -21,9 +20,8 @@ const Header = () => {
         isScrolled ? "bg-white/80 backdrop-blur-md shadow-sm" : "bg-white"
       }`}
     >
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* ロゴ */}
           <a href="#" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold">by</span>
@@ -38,11 +36,12 @@ const Header = () => {
           </a>
 
           {/* デスクトップナビゲーション */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-8">
             {[
               { name: "特徴", href: "#features" },
               { name: "料金", href: "#pricing" },
               { name: "導入の流れ", href: "#steps" },
+              { name: "テンプレート一覧", href: "/temple" },
               { name: "お問い合わせ", href: "#contact" },
             ].map((item) => (
               <a
@@ -58,8 +57,7 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* 右側のボタン群 */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <a
               href="#"
               className={`text-sm font-medium hover:text-blue-600 transition-colors ${
@@ -78,7 +76,7 @@ const Header = () => {
 
           {/* モバイルメニューボタン */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
@@ -91,7 +89,7 @@ const Header = () => {
 
         {/* モバイルメニュー */}
         <div
-          className={`md:hidden transition-all duration-300 ease-in-out ${
+          className={`lg:hidden transition-all duration-300 ease-in-out ${
             isMobileMenuOpen
               ? "max-h-96 opacity-100 py-4"
               : "max-h-0 opacity-0 overflow-hidden"

@@ -38,7 +38,7 @@ const PaymentForm = () => {
               <div className="h-12 bg-gray-50 rounded-lg border border-gray-200 px-4 flex items-center text-gray-400">
                 123
               </div>
-              <span className="absolute -top-2 left-4 px-2 bg-white text-xs text-gray-500 flex-nowrap">
+              <span className="absolute -top-2 left-4 px-2 bg-white text-xs text-gray-500 whitespace-nowrap">
                 セキュリティコード
               </span>
             </div>
