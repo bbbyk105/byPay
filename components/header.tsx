@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import useNavigate from "@/hooks/router";
+import MobileMenu from "./mobile-menu"; // モバイルメニューをインポート
 
 const Header = () => {
   const { goTo } = useNavigate();
@@ -44,7 +45,7 @@ const Header = () => {
               { name: "特徴", href: "#features" },
               { name: "料金", href: "#pricing" },
               { name: "導入の流れ", href: "#steps" },
-              { name: "テンプレート一覧", onClick: () => goTo("/temple") }, // 修正
+              { name: "テンプレート一覧", onClick: () => goTo("/temple") },
               { name: "お問い合わせ", href: "#contact" },
             ].map((item, index) => (
               <button
@@ -52,7 +53,7 @@ const Header = () => {
                 className={`text-sm font-medium hover:text-blue-600 transition-colors relative group ${
                   isScrolled ? "text-gray-600" : "text-gray-900"
                 }`}
-                onClick={item.onClick ? item.onClick : undefined} // hrefの競合を回避
+                onClick={item.onClick ? item.onClick : undefined}
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
@@ -74,34 +75,11 @@ const Header = () => {
         </div>
 
         {/* モバイルメニュー */}
-        <div
-          className={`lg:hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen
-              ? "max-h-96 opacity-100 py-4"
-              : "max-h-0 opacity-0 overflow-hidden"
-          }`}
-        >
-          <nav className="flex flex-col space-y-4 pb-6">
-            {[
-              { name: "特徴", href: "#features" },
-              { name: "料金", href: "#pricing" },
-              { name: "導入の流れ", href: "#steps" },
-              { name: "テンプレート一覧", onClick: () => goTo("/temple") }, // 修正
-              { name: "お問い合わせ", href: "#contact" },
-            ].map((item, index) => (
-              <button
-                key={index}
-                className="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 rounded-lg hover:bg-blue-50"
-                onClick={() => {
-                  if (item.onClick) item.onClick();
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                {item.name}
-              </button>
-            ))}
-          </nav>
-        </div>
+        <MobileMenu
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+          goTo={goTo}
+        />
       </div>
     </header>
   );
