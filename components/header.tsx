@@ -1,8 +1,11 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import useNavigate from "@/hooks/router";
 
 const Header = () => {
+  const { goTo } = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -41,38 +44,21 @@ const Header = () => {
               { name: "特徴", href: "#features" },
               { name: "料金", href: "#pricing" },
               { name: "導入の流れ", href: "#steps" },
-              { name: "テンプレート一覧", href: "/temple" },
+              { name: "テンプレート一覧", onClick: () => goTo("/temple") }, // 修正
               { name: "お問い合わせ", href: "#contact" },
-            ].map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
+            ].map((item, index) => (
+              <button
+                key={index}
                 className={`text-sm font-medium hover:text-blue-600 transition-colors relative group ${
                   isScrolled ? "text-gray-600" : "text-gray-900"
                 }`}
+                onClick={item.onClick ? item.onClick : undefined} // hrefの競合を回避
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
-              </a>
+              </button>
             ))}
           </nav>
-
-          <div className="hidden lg:flex items-center space-x-4">
-            <a
-              href="#"
-              className={`text-sm font-medium hover:text-blue-600 transition-colors ${
-                isScrolled ? "text-gray-600" : "text-gray-900"
-              }`}
-            >
-              ログイン
-            </a>
-            <a
-              href="#"
-              className="bg-blue-600 text-white text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30"
-            >
-              無料デモを試す
-            </a>
-          </div>
 
           {/* モバイルメニューボタン */}
           <button
@@ -100,31 +86,20 @@ const Header = () => {
               { name: "特徴", href: "#features" },
               { name: "料金", href: "#pricing" },
               { name: "導入の流れ", href: "#steps" },
+              { name: "テンプレート一覧", onClick: () => goTo("/temple") }, // 修正
               { name: "お問い合わせ", href: "#contact" },
-            ].map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
+            ].map((item, index) => (
+              <button
+                key={index}
                 className="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 rounded-lg hover:bg-blue-50"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  if (item.onClick) item.onClick();
+                  setIsMobileMenuOpen(false);
+                }}
               >
                 {item.name}
-              </a>
+              </button>
             ))}
-            <div className="pt-4 space-y-4">
-              <a
-                href="#"
-                className="block text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 rounded-lg hover:bg-blue-50"
-              >
-                ログイン
-              </a>
-              <a
-                href="#"
-                className="block bg-blue-600 text-white text-center px-4 py-2.5 rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20"
-              >
-                無料デモを試す
-              </a>
-            </div>
           </nav>
         </div>
       </div>
