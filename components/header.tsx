@@ -42,6 +42,7 @@ const Header = () => {
           {/* デスクトップナビゲーション */}
           <nav className="hidden lg:flex items-center space-x-8">
             {[
+              { name: "ホーム", onClick: () => goTo("/") },
               { name: "特徴", href: "#features" },
               { name: "料金", href: "#pricing" },
               { name: "導入の流れ", href: "#steps" },
