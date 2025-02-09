@@ -10,8 +10,11 @@ import {
 import { pricingPlans } from "@/data/price";
 import { features } from "@/data/features";
 import PaymentForm from "@/components/payment-form";
+import useNavigate from "@/hooks/router";
 
 const LandingPage = () => {
+  const { goTo } = useNavigate();
+
   return (
     <div className="min-h-screen">
       {/* ヒーローセクション - pt-20を追加してヘッダーの高さ分を確保 */}
@@ -36,7 +39,10 @@ const LandingPage = () => {
                 キャッシュレス決済を即実現 <br />
                 サイトは自由にカスタマイズ可能
               </p>
-              <button className="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-colors flex items-center md:mx-0 mx-auto">
+              <button
+                onClick={() => goTo("/temple")}
+                className="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-colors flex items-center md:mx-0 mx-auto"
+              >
                 テンプレートを見る
                 <ArrowRight className="ml-2" />
               </button>
@@ -139,10 +145,13 @@ const LandingPage = () => {
       <section className="py-24 bg-gradient-to-r from-teal-600 to-blue-400 text-white">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-8">
-            まずは無料デモでお試しください
+            まずは無料でお試しください
           </h2>
-          <button className="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-colors inline-flex items-center">
-            無料デモを試す
+          <button
+            onClick={() => goTo("/temple")}
+            className="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-colors inline-flex items-center"
+          >
+            無料テンプレートを試す
             <ArrowRight className="ml-2" />
           </button>
         </div>

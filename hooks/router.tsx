@@ -8,7 +8,7 @@ interface UseNavigate {
 }
 
 const useNavigate = (): UseNavigate => {
-  const router = useRouter(); // 修正済み
+  const router = useRouter();
 
   return {
     goTo: (path: string) => {
