@@ -15,7 +15,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
     { name: "料金", href: "#pricing" },
     { name: "導入の流れ", href: "#steps" },
     { name: "テンプレート一覧", onClick: () => goTo("/temple") },
-    { name: "お問い合わせ", href: "#contact" },
+    { name: "お問い合わせ", onClick: () => goTo("/contact") },
   ];
 
   useEffect(() => {

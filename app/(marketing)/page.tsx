@@ -75,32 +75,68 @@ const LandingPage = () => {
       </section>
 
       {/* 料金プラン */}
-      <section className="py-24">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-16">
+      <section className="py-24 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl font-bold text-center mb-6">
             シンプルな料金体系
           </h2>
-          <div className="max-w-md mx-auto flex flex-col">
+          <p className="text-gray-600 text-center max-w-2xl mx-auto mb-16">
+            初期費用のみで始められる、わかりやすい料金プラン。
+            運用時の固定費は0円で、決済時の手数料のみです。
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {pricingPlans.map((plan, index) => (
               <div
                 key={index}
-                className="bg-white border-2 border-blue-500 rounded-xl p-8"
+                className={`bg-white rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105 ${
+                  plan.highlight
+                    ? "border-2 border-blue-500 relative"
+                    : "border border-gray-200"
+                }`}
               >
-                <h3 className="text-2xl font-bold text-center mb-4">
-                  {plan.name}
-                </h3>
-                <div className="text-center mb-8">
-                  <span className="text-5xl font-bold">¥{plan.price}</span>
-                  <span className="text-gray-600">/{plan.period}</span>
+                {plan.highlight && (
+                  <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm">
+                      人気プラン
+                    </span>
+                  </div>
+                )}
+
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-center mb-2">
+                    {plan.name}
+                  </h3>
+                  <p className="text-gray-600 text-center text-sm mb-6">
+                    {plan.description}
+                  </p>
+
+                  <div className="text-center mb-8">
+                    <span className="text-5xl font-bold">¥{plan.price}</span>
+                    <span className="text-gray-600 block mt-2">
+                      {plan.period}
+                    </span>
+                  </div>
+
+                  <ul className="space-y-4">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mr-3" />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    className={`w-full mt-8 py-3 px-6 rounded-lg text-center transition-colors ${
+                      plan.highlight
+                        ? "bg-blue-500 text-white hover:bg-blue-600"
+                        : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                    }`}
+                  >
+                    詳細を見る
+                  </button>
                 </div>
-                <ul className="space-y-4">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-blue-500 mr-3" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>

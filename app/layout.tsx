@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
@@ -24,12 +25,12 @@ export default function RootLayout({
     <html lang="ja">
       <body
         className={cn(
-          "bg-background antialiased min-h-screen",
+          "bg-background antialiased min-h-screen flex flex-col", // ここで flex レイアウトに変更
           fontNotoSansJP.className
         )}
       >
         <Header />
-        {children}
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>
