@@ -44,7 +44,7 @@ const Header = () => {
             {[
               { name: "ホーム", onClick: () => goTo("/") },
               { name: "特徴", href: "#features" },
-              { name: "料金", href: "#pricing" },
+              { name: "料金", href: "#fee" },
               { name: "導入の流れ", href: "#steps" },
               { name: "テンプレート一覧", onClick: () => goTo("/temple") },
               { name: "お問い合わせ", onClick: () => goTo("/contact") },
