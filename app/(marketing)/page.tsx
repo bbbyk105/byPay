@@ -5,7 +5,6 @@ import {
   CreditCard,
   Package,
   Settings,
-  XCircle,
 } from "lucide-react";
 
 import { pricingPlans } from "@/data/price";
@@ -14,30 +13,10 @@ import PaymentForm from "@/components/payment-form";
 import useNavigate from "@/hooks/router";
 import SlideButton from "@/components/slide-button";
 import React from "react";
+import { problems } from "@/data/problems";
 
 const LandingPage = () => {
   const { goTo } = useNavigate();
-
-  const problems = [
-    {
-      title: "現金決済で売上管理が大変...",
-      description:
-        "手作業での現金管理は時間がかかり、ミスのリスクも高くなりがち。確認作業に追われて接客に集中できない。",
-      icon: <XCircle className="w-12 h-12 text-red-500" />,
-    },
-    {
-      title: "レジを導入するほどの予算がない",
-      description:
-        "高額な初期費用と月額料金が必要なレジシステム。イベント出店では採算が合わない。",
-      icon: <XCircle className="w-12 h-12 text-red-500" />,
-    },
-    {
-      title: "決済手段が限られている",
-      description:
-        "現金しか受け付けられず、お客様の支払い手段が限定的。売上機会を逃してしまうことも。",
-      icon: <XCircle className="w-12 h-12 text-red-500" />,
-    },
-  ];
 
   return (
     <div className="min-h-screen">
@@ -94,11 +73,8 @@ const LandingPage = () => {
                 key={index}
                 className="bg-white p-8 rounded-xl border border-blue-100 shadow-md transform transition-all duration-200 hover:shadow-lg"
               >
-                <div className="flex justify-center mb-6">
-                  {React.cloneElement(problem.icon, {
-                    className: "w-12 h-12 text-blue-500",
-                  })}
-                </div>
+                <div className="flex justify-center mb-6">{problem.icon}</div>
+
                 <h3 className="text-xl font-bold mb-4 text-center text-gray-900">
                   {problem.title}
                 </h3>
