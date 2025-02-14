@@ -12,7 +12,7 @@ const FeaturesPage = () => {
       <BackgroundBeams />
       {/* Hero Section */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 text-center ">
-        <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#A29BFE] to-[#00CEC9]">
+        <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b text-white">
           選ばれる理由
         </h1>
         <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg mx-auto">

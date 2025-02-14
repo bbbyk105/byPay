@@ -39,6 +39,9 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        slideUp: "slideUp 0.5s ease-out forwards",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

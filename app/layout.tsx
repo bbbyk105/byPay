@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="ja">
       <body
         className={cn(
-          "bg-background antialiased min-h-screen flex flex-col", // Header/ Footer を含む全体レイアウト
+          "bg-background antialiased min-h-screen flex flex-col animate-slideUp", // Header/ Footer を含む全体レイアウト
           fontNotoSansJP.className
         )}
       >
