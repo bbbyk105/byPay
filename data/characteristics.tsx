@@ -56,13 +56,12 @@ export const characteristics: Characteristic[] = [
       {
         title: "即日開設",
         description:
-          "テンプレートを選んで情報を入力するだけで、その日のうちに開店可能",
+          "テンプレートを選んで情報を入力するだけで、最短で即日開店可能",
         icon: <Timer className="w-6 h-6 text-blue-400" />,
       },
       {
         title: "カスタマイズ自由",
-        description:
-          "テンプレートをベースに、自由にデザインや機能をカスタマイズ",
+        description: "自由にデザインや機能をカスタマイズ可能",
         icon: <Code className="w-6 h-6 text-blue-400" />,
       },
       {

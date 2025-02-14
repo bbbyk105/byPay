@@ -1,95 +1,79 @@
-import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
+"use client";
 
-import Image from "next/image";
+import React from "react";
+import { motion } from "framer-motion";
 import { characteristics } from "@/data/characteristics";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const FeaturesPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      {/* ヘッダー（ヒーロー）セクション */}
-      <div className="bg-gradient-to-r from-teal-600 to-blue-500 text-white pt-24 md:pt-32 pb-16 sm:pb-20 md:pb-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4 md:mb-6 leading-snug">
-            選ばれる理由
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-center max-w-2xl mx-auto px-4 mb-4 leading-relaxed">
-            グローバル対応の決済システム、スピーディーな導入、
-            コスト効率の良さで、あなたのビジネスをサポートします
-          </p>
-        </div>
+    // RootLayout側でmin-h-screenが設定されているため、ここではflex-growで残りの高さを埋める
+    <div className="bg-[#1b1b2f] relative flex flex-col flex-grow pt-32">
+      <BackgroundBeams />
+      {/* Hero Section */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 text-center ">
+        <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#A29BFE] to-[#00CEC9]">
+          選ばれる理由
+        </h1>
+        <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg mx-auto">
+          グローバル対応の決済システム、スピーディーな導入、コスト効率の良さで、
+          あなたのビジネスをサポートします
+        </p>
       </div>
 
-      {/* メイン特徴セクション */}
-      <div className="container mx-auto px-4 md:px-6 py-12 md:py-24">
-        <div className="space-y-12 md:space-y-16">
-          {characteristics.map((characteristic, index) => (
-            <div
+      {/* Features Grid */}
+      <div className="max-w-6xl mx-auto px-4 py-20 flex-grow">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {characteristics.map((item, index) => (
+            <motion.div
               key={index}
-              className="grid md:grid-cols-2 gap-8 md:gap-12 items-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              className="relative group"
             >
-              <div className={`${index % 2 === 1 ? "md:order-2" : ""}`}>
-                <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                  {characteristic.icon}
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-snug">
-                    {characteristic.title}
-                  </h2>
-                </div>
-                <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed">
-                  {characteristic.mainDescription}
-                </p>
-                <div className="space-y-4 md:space-y-6">
-                  {characteristic.details.map((detail, detailIndex) => (
-                    <div
-                      key={detailIndex}
-                      className="flex items-start gap-3 md:gap-4"
-                    >
-                      {detail.icon}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#6C5CE7] to-[#00CEC9] opacity-10 rounded-2xl transition-opacity duration-300" />
+              <div className="relative p-8 border border-[#A29BFE] rounded-2xl bg-neutral-800 text-white">
+                <div className="mb-4 text-[#00CEC9]">{item.icon}</div>
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm opacity-80">{item.mainDescription}</p>
+                <ul className="mt-4 space-y-3">
+                  {item.details.map((detail, i) => (
+                    <li key={i} className="flex items-start space-x-3">
+                      <div className="text-[#00CEC9]">{detail.icon}</div>
                       <div>
-                        <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-1 md:mb-2 leading-snug">
+                        <h4 className="text-base font-medium">
                           {detail.title}
-                        </h3>
-                        <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
+                        </h4>
+                        <p className="text-sm opacity-80">
                           {detail.description}
                         </p>
                       </div>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
-              <div className={`${index % 2 === 1 ? "md:order-1" : ""}`}>
-                <Card className="overflow-hidden">
-                  <CardContent className="p-0">
-                    <div className="aspect-video bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
-                      <Image
-                        src="/api/placeholder/600/400"
-                        alt={characteristic.title}
-                        width={600}
-                        height={400}
-                        className="rounded-lg shadow-lg w-full h-auto"
-                      />
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-
-      {/* CTAセクション */}
-      <div className="bg-gradient-to-r from-teal-600 to-blue-500 text-white py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 leading-snug">
+      {/* CTA Section */}
+      <div className="relative py-20">
+        <div className="max-w-2xl mx-auto text-center px-4">
+          <h2 className="text-3xl font-bold text-white mb-4">
             さっそく始めてみませんか？
           </h2>
-          <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 px-4 leading-relaxed">
+          <p className="text-neutral-400 mb-8">
             無料でテンプレートを試して、あなたのビジネスに最適な
             決済ソリューションを見つけましょう
           </p>
-          <button className="bg-white text-blue-600 px-6 md:px-8 py-3 md:py-4 rounded-lg font-bold text-base sm:text-lg md:text-xl hover:bg-blue-50 transition-colors">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 rounded-full bg-gradient-to-r from-[#6C5CE7] to-[#00CEC9] text-white font-medium"
+          >
             無料デモを試す
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>
