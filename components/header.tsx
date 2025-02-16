@@ -40,7 +40,7 @@ const Header = () => {
               { name: "ホーム", onClick: () => goTo("/") },
               { name: "特徴", onClick: () => goTo("/characteristic") },
               { name: "料金", onClick: () => goTo("/#fee") },
-              { name: "導入の流れ" },
+              { name: "導入の流れ", onClick: () => goTo("/introduction") },
               { name: "テンプレート一覧", onClick: () => goTo("/temple") },
               { name: "お問い合わせ", onClick: () => goTo("/contact") },
             ].map((item, index) => (
