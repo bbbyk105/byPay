@@ -76,7 +76,7 @@ const PricingDetail = () => {
                       <ul className="space-y-2">
                         <li className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-blue-500 mr-2" />
-                          <span>国内カード：3.5%</span>
+                          <span>国内カード：3.6%</span>
                         </li>
                         <li className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-blue-500 mr-2" />
@@ -90,11 +90,13 @@ const PricingDetail = () => {
                       <ul className="space-y-2">
                         <li className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-blue-500 mr-2" />
-                          <span>銀行振込：¥300/件</span>
+                          <span>銀行振込： 1.5% / 返金 ¥250</span>
                         </li>
                         <li className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-blue-500 mr-2" />
-                          <span>コンビニ決済：¥250/件</span>
+                          <span>
+                            コンビニ決済：3.6%/ 返金 ¥250 / 最小金額: ￥120
+                          </span>
                         </li>
                       </ul>
                     </div>
