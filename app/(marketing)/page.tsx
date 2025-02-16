@@ -14,6 +14,7 @@ import useNavigate from "@/hooks/router";
 import SlideButton from "@/components/slide-button";
 import React from "react";
 import { problems } from "@/data/problems";
+import { motion } from "framer-motion";
 
 const LandingPage = () => {
   const { goTo } = useNavigate();
@@ -152,69 +153,115 @@ const LandingPage = () => {
       </section>
 
       {/* 5. 料金プラン */}
-      <section id="fee" className="py-24 bg-gray-50">
+      <section id="fee" className="py-16 lg:py-24 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl font-bold text-center mb-6">
-            シンプルな料金体系
-          </h2>
-          <p className="text-gray-600 text-center max-w-2xl mx-auto mb-16">
-            初期費用のみで始められる、わかりやすい料金プラン。
-            運用時の固定費は0円で、決済時の手数料のみです。
-          </p>
+          <div className="text-center mb-12 lg:mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              シンプルな料金体系
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-base lg:text-lg">
+              初期費用のみで始められる、わかりやすい料金プラン。
+              運用時の固定費は0円で、決済時の手数料のみです。
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {/* モバイルビュー: アコーディオン形式 */}
+          <div className="block lg:hidden space-y-4">
             {pricingPlans.map((plan, index) => (
-              <div
+              <motion.div
                 key={index}
-                className={`bg-white rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105 ${
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-xl overflow-hidden shadow-sm"
+              >
+                <div className={`p-6 ${plan.highlight ? "bg-blue-50" : ""}`}>
+                  {plan.highlight && (
+                    <span className="inline-block bg-blue-500 text-white text-xs px-3 py-1 rounded-full mb-3">
+                      人気プラン
+                    </span>
+                  )}
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <div className="flex items-baseline mb-3">
+                    <span className="text-3xl font-bold">¥{plan.price}</span>
+                    <span className="text-gray-600 ml-2">{plan.period}</span>
+                  </div>
+                  <p className="text-gray-600 text-sm mb-4">
+                    {plan.description}
+                  </p>
+                  <div className="space-y-3">
+                    {plan.features.map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-blue-500 mr-3 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-700 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    className={`w-full mt-6 py-3 px-4 rounded-lg text-center transition-all flex items-center justify-center ${
+                      plan.highlight
+                        ? "bg-blue-500 text-white hover:bg-blue-600"
+                        : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                    }`}
+                    onClick={() => goTo("/price")}
+                  >
+                    詳細を見る
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* デスクトップビュー: グリッド形式 */}
+          <div className="hidden lg:grid grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {pricingPlans.map((plan, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`relative bg-white rounded-xl p-8 transition-all ${
                   plan.highlight
-                    ? "border-2 border-blue-500 relative"
-                    : "border border-gray-200"
+                    ? "shadow-lg ring-2 ring-blue-500"
+                    : "shadow-sm hover:shadow-md"
                 }`}
               >
                 {plan.highlight && (
-                  <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm">
                       人気プラン
                     </span>
                   </div>
                 )}
 
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-center mb-2">
-                    {plan.name}
-                  </h3>
-                  <p className="text-gray-600 text-center text-sm mb-6">
-                    {plan.description}
-                  </p>
-
-                  <div className="text-center mb-8">
-                    <span className="text-5xl font-bold">¥{plan.price}</span>
-                    <span className="text-gray-600 block mt-2">
-                      {plan.period}
-                    </span>
-                  </div>
-
-                  <ul className="space-y-4">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mr-3" />
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <button
-                    className={`w-full mt-8 py-3 px-6 rounded-lg text-center transition-colors ${
-                      plan.highlight
-                        ? "bg-blue-500 text-white hover:bg-blue-600"
-                        : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                    }`}
-                  >
-                    詳細を見る
-                  </button>
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                  <p className="text-gray-600 text-sm">{plan.description}</p>
                 </div>
-              </div>
+
+                <div className="text-center mb-8">
+                  <div className="flex items-baseline justify-center">
+                    <span className="text-4xl font-bold">¥{plan.price}</span>
+                    <span className="text-gray-600 ml-2">{plan.period}</span>
+                  </div>
+                </div>
+
+                <div className="space-y-4 mb-8">
+                  {plan.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-blue-500 mr-3 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <SlideButton
+                  onClick={() => goTo("/price")}
+                  label="詳細を見る"
+                  icon={<ArrowRight />}
+                />
+              </motion.div>
             ))}
           </div>
         </div>
