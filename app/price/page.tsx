@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   CheckCircle,
@@ -8,14 +9,17 @@ import {
   Shield,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import SlideButton from "@/components/slide-button";
+import useNavigate from "@/hooks/router";
 
 const PricingDetail = () => {
+  const { goTo } = useNavigate();
   return (
     <div className="min-h-screen bg-gray-50">
       {/* ヘッダーセクション */}
       <section className="pt-16 pb-12 bg-white">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold text-center mb-6">
+          <h1 className="text-4xl font-bold text-center mb-6 mt-16">
             料金プラン詳細
           </h1>
           <p className="text-gray-600 text-center max-w-2xl mx-auto">
@@ -187,9 +191,13 @@ const PricingDetail = () => {
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
             導入に関するご質問や料金のお見積もりなど、お客様のご要望に応じて詳しくご説明させていただきます。
           </p>
-          <button className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors">
-            お問い合わせ
-          </button>
+          <div className="flex justify-center">
+            <SlideButton
+              onClick={() => goTo("/contact")}
+              label="お問い合わせ"
+              className="flex items-center"
+            />
+          </div>
         </div>
       </section>
     </div>
