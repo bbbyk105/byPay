@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import useNavigate from "@/hooks/router";
-import MobileMenu from "./mobile-menu"; // モバイルメニューをインポート
+import MobileMenu from "./mobile-menu";
+import logo from "@/public/logos/logo.png";
 
 const Header = () => {
   const { goTo } = useNavigate();
@@ -25,18 +27,11 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           <a href="#" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">by</span>
+            <div className="relative w-full h-full">
+              <Image src={logo} alt="byPay Logo" width={100} height={150} />
             </div>
-            <span
-              className={`text-xl font-bold ${
-                isScrolled ? "text-gray-900" : "text-gray-900"
-              }`}
-            >
-              Pay
-            </span>
           </a>
 
           {/* デスクトップナビゲーション */}
@@ -51,13 +46,13 @@ const Header = () => {
             ].map((item, index) => (
               <button
                 key={index}
-                className={`text-sm font-medium hover:text-blue-600 transition-colors relative group ${
+                className={`text-sm font-medium hover:text-purple-500 transition-colors relative group ${
                   isScrolled ? "text-gray-600" : "text-gray-900"
                 }`}
                 onClick={item.onClick ? item.onClick : undefined}
               >
                 {item.name}
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-purple-500 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
               </button>
             ))}
           </nav>

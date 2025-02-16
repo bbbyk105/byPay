@@ -39,11 +39,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
 
   return (
     <div
-      className={`lg:hidden fixed inset-x-0 top-0 bg-white z-50 transition-all duration-300 ease-in-out ${
-        isOpen
-          ? "max-h-96 opacity-100 py-4"
-          : "max-h-0 opacity-0 overflow-hidden"
-      }`}
+      className={`lg:hidden fixed inset-0 bg-blue-100 z-50 transition-transform duration-300 ease-in-out ${
+        isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+      } w-screen h-screen`}
     >
       <div className="container mx-auto px-4">
         {/* 閉じるボタン */}
@@ -62,7 +60,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
           {menuItems.map((item, index) => (
             <button
               key={index}
-              className="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 rounded-lg hover:bg-blue-50"
+              className="text-gray-600 hover:text-purple-300 transition-colors px-2 py-1 rounded-lg hover:bg-blue-50"
               onClick={() => {
                 if (item.onClick) item.onClick();
                 onClose();
