@@ -11,9 +11,9 @@ const FeaturesPage = () => {
       <BackgroundBeams />
       {/* Hero Section */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 text-center ">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
           選ばれる理由
-        </h1>
+        </h2>
         <p className="mt-4 font-normal text-base text-gray-600 max-w-lg mx-auto">
           グローバル対応の決済システム、スピーディーな導入、コスト効率の良さで、
           あなたのビジネスをサポートします
