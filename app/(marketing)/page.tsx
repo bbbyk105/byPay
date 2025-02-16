@@ -1,11 +1,5 @@
 "use client";
-import {
-  ArrowRight,
-  CheckCircle,
-  CreditCard,
-  Package,
-  Settings,
-} from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 
 import { pricingPlans } from "@/data/price";
 import { features } from "@/data/features";
@@ -15,6 +9,7 @@ import SlideButton from "@/components/slide-button";
 import React from "react";
 import { problems } from "@/data/problems";
 import { motion } from "framer-motion";
+import { steps } from "@/data/steps";
 
 const LandingPage = () => {
   const { goTo } = useNavigate();
@@ -104,26 +99,10 @@ const LandingPage = () => {
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-16">
-            かんたん3ステップで導入完了
+            かんたん5ステップで導入完了
           </h2>
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              {
-                icon: <Settings className="w-12 h-12 text-blue-500" />,
-                title: "1. アカウント作成",
-                description: "必要事項を入力するだけで即日開設",
-              },
-              {
-                icon: <Package className="w-12 h-12 text-blue-500" />,
-                title: "2. 商品登録",
-                description: "スマホで写真を撮って商品情報を入力",
-              },
-              {
-                icon: <CreditCard className="w-12 h-12 text-blue-500" />,
-                title: "3. 決済テスト",
-                description: "テスト決済で動作確認して完了",
-              },
-            ].map((step, index) => (
+          <div className="grid md:grid-cols-5 gap-12">
+            {steps.map((step, index) => (
               <div key={index} className="text-center">
                 <div className="flex justify-center mb-6">{step.icon}</div>
                 <h3 className="text-xl font-bold mb-4">{step.title}</h3>
