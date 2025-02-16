@@ -42,7 +42,7 @@ const PricingDetail = () => {
                       <div>
                         <h4 className="font-semibold mb-1">導入サポート費用</h4>
                         <p className="text-gray-600">
-                          システムの初期設定からスタッフのトレーニングまで、スムーズな導入をサポートいたします。
+                          システムの初期設定からサイトの使用方法まで、スムーズな導入をサポートいたします。
                         </p>
                       </div>
                     </div>
@@ -111,10 +111,10 @@ const PricingDetail = () => {
                       <HelpCircle className="w-6 h-6 text-blue-500 mt-1" />
                       <div>
                         <h4 className="font-semibold mb-1">
-                          契約期間の縛りはありますか？
+                          導入費用以外の追加料金はありますか？
                         </h4>
                         <p className="text-gray-600">
-                          最低契約期間はございません。いつでも解約可能です。
+                          当社は買い切り型のサービスのため追加料金はございません。
                         </p>
                       </div>
                     </div>
@@ -125,7 +125,9 @@ const PricingDetail = () => {
                           導入までどのくらい時間がかかりますか？
                         </h4>
                         <p className="text-gray-600">
-                          通常1-2週間程度でご利用開始いただけます。
+                          イベントプランの場合は最短一日。
+                          <br />
+                          他プランの場合、通常2週間-1ヶ月半程度でご利用開始いただけます。
                         </p>
                       </div>
                     </div>
@@ -161,7 +163,7 @@ const PricingDetail = () => {
                       </li>
                       <li className="flex items-start">
                         <CheckCircle className="w-5 h-5 text-blue-500 mr-3 mt-1" />
-                        <span>専任のアカウントマネージャーによるサポート</span>
+                        <span>アカウントマネージャーによるサポート</span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle className="w-5 h-5 text-blue-500 mr-3 mt-1" />
