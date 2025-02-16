@@ -32,12 +32,12 @@ const LandingPage = () => {
         <div className="container mx-auto px-6 py-24 relative">
           <div className="grid md:grid-cols-2 items-center gap-12">
             <div className="text-center md:text-left relative z-10">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <h1 className="text-3xl md:text-5xl font-bold mb-6">
                 マルシェ・展示会の
                 <br />
                 決済をもっとカンタンに
               </h1>
-              <p className="text-xl mb-8">
+              <p className="text-sm mb-8">
                 月額費用0円、最短即日導入 <br />
                 キャッシュレス決済を即実現 <br />
                 サイトは自由にカスタマイズ可能
@@ -60,7 +60,7 @@ const LandingPage = () => {
       {/* 2. 課題提起セクション */}
       <section className="py-24 bg-gradient-to-r from-blue-50 to-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">
+          <h2 className="text-3xl  font-bold text-center mb-4 text-gray-900">
             こんな課題はありませんか？
           </h2>
           <p className="text-gray-600 text-center mb-16 max-w-2xl mx-auto">
@@ -103,7 +103,7 @@ const LandingPage = () => {
       {/* 3. 導入ステップ */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-16">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-16">
             かんたん3ステップで導入完了
           </h2>
           <div className="grid md:grid-cols-3 gap-12">
