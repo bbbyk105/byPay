@@ -25,121 +25,120 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
 
   useEffect(() => {
     if (isOpen) {
+      const scrollY = window.scrollY;
       // スクロールバーの幅を計算
       const scrollbarWidth =
         window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = "hidden";
-      // スクロールバーの幅を考慮してpaddingRightを設定
+
+      // bodyに現在のスクロール位置を記憶させる
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
     } else {
-      document.body.style.overflow = "unset";
-      document.body.style.paddingRight = "0";
+      // 保存していたスクロール位置を復元
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.paddingRight = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
     }
+
     return () => {
-      document.body.style.overflow = "unset";
-      document.body.style.paddingRight = "0";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.paddingRight = "";
     };
   }, [isOpen]);
 
   return (
-    <>
-      {isOpen && (
-        <style jsx global>{`
-          :root {
-            --vh: ${window.innerHeight * 0.01}px;
-          }
-          body {
-            position: fixed;
-            width: 100%;
-          }
-        `}</style>
-      )}
+    <div
+      className={`fixed inset-0 ${
+        isOpen ? "pointer-events-auto" : "pointer-events-none"
+      }`}
+      style={{
+        isolation: "isolate",
+        zIndex: 99999,
+      }}
+    >
+      {/* 背景のオーバーレイ */}
       <div
-        className={`fixed inset-0 ${
-          isOpen ? "pointer-events-auto" : "pointer-events-none"
+        className={`fixed inset-0 bg-black transition-opacity duration-500 ${
+          isOpen ? "opacity-50" : "opacity-0"
+        }`}
+        onClick={onClose}
+        style={{ zIndex: 99999 }}
+      />
+      {/* 左側からスライドインするメニューパネル */}
+      <div
+        className={`fixed top-0 left-0 h-full w-3/4 max-w-xs bg-gray-900 transform transition-transform duration-500 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         style={{
-          isolation: "isolate",
-          zIndex: 99999,
+          zIndex: 100000,
+          height: "100dvh", // dynamic viewport heightを使用
         }}
       >
-        {/* 背景のオーバーレイ */}
-        <div
-          className={`fixed inset-0 bg-black transition-opacity duration-500 ${
-            isOpen ? "opacity-50" : "opacity-0"
-          }`}
-          onClick={onClose}
-          style={{ zIndex: 99999 }}
-        />
-        {/* 左側からスライドインするメニューパネル */}
-        <div
-          className={`fixed top-0 left-0 h-full w-3/4 max-w-xs bg-gray-900 transform transition-transform duration-500 ${
-            isOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
-          style={{
-            zIndex: 100000,
-            height: "100dvh", // dynamic viewport heightを使用
-          }}
-        >
-          {/* 全体のパディングは0にして、必要なところだけパディングをつける */}
-          <div className="flex flex-col h-full p-0">
-            {/* 上部：ロゴ & Xボタン */}
-            <div className="flex items-center justify-between px-4 py-4">
-              <Image
-                src={logowhite}
-                alt="byPay"
-                className="h-12 w-auto"
-                priority
-              />
-              <button
-                onClick={onClose}
-                className="text-white"
-                aria-label="メニューを閉じる"
-              >
-                <X className="w-10 h-10" />
-              </button>
-            </div>
+        {/* 全体のパディングは0にして、必要なところだけパディングをつける */}
+        <div className="flex flex-col h-full p-0">
+          {/* 上部：ロゴ & Xボタン */}
+          <div className="flex items-center justify-between px-4 py-4">
+            <Image
+              src={logowhite}
+              alt="byPay"
+              className="h-12 w-auto"
+              priority
+            />
+            <button
+              onClick={onClose}
+              className="text-white"
+              aria-label="メニューを閉じる"
+            >
+              <X className="w-10 h-10" />
+            </button>
+          </div>
 
-            {/* ナビゲーションメニュー */}
-            <nav className="mt-4 px-4">
-              {menuItems.map((item, index) => (
-                <div key={index} className="mb-6">
-                  <button
-                    onClick={() => {
-                      item.onClick();
-                      onClose();
-                    }}
-                    className="text-2xl text-gray-300 hover:text-white transition-colors duration-300 w-full text-left"
-                  >
-                    {item.name}
-                  </button>
-                </div>
-              ))}
-            </nav>
+          {/* ナビゲーションメニュー */}
+          <nav className="mt-4 px-4">
+            {menuItems.map((item, index) => (
+              <div key={index} className="mb-6">
+                <button
+                  onClick={() => {
+                    item.onClick();
+                    onClose();
+                  }}
+                  className="text-2xl text-gray-300 hover:text-white transition-colors duration-300 w-full text-left"
+                >
+                  {item.name}
+                </button>
+              </div>
+            ))}
+          </nav>
 
-            {/* 下部のソーシャルアイコン */}
-            <div className="flex space-x-6 px-4 mt-auto pb-4">
-              <a
-                href="https://www.instagram.com/bypay_official"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <AiFillInstagram className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
-              </a>
-              <a
-                href="https://x.com/byPay_official"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-              >
-                <FaSquareXTwitter className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
-              </a>
-            </div>
+          {/* 下部のソーシャルアイコン */}
+          <div className="flex space-x-6 px-4 mt-auto pb-4">
+            <a
+              href="https://www.instagram.com/bypay_official"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <AiFillInstagram className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
+            </a>
+            <a
+              href="https://x.com/byPay_official"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (Twitter)"
+            >
+              <FaSquareXTwitter className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
+            </a>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
