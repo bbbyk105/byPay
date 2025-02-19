@@ -40,7 +40,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-50 ${
+      className={`fixed inset-0 z-[1000000] ${
         isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}
     >
