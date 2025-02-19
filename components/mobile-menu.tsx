@@ -16,7 +16,7 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
   const menuItems = [
     { name: "ホーム", onClick: () => goTo("/") },
-    { name: "特徴", onClick: () => goTo("/characteristic") },
+    { name: "特徴", onClick: () => goTo("/features") },
     { name: "料金", onClick: () => goTo("/price") },
     { name: "導入の流れ", onClick: () => goTo("/introduction") },
     { name: "テンプレート一覧", onClick: () => goTo("/temple") },
