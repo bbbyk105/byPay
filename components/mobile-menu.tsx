@@ -1,7 +1,11 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { AiFillInstagram } from "react-icons/ai";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import Image from "next/image";
+import logowhite from "@/public/logos/logo-white.png";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -13,24 +17,21 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
   const menuItems = [
     { name: "ホーム", onClick: () => goTo("/") },
     { name: "特徴", onClick: () => goTo("/characteristic") },
-    { name: "料金", onClick: () => goTo("/#fee") },
-    { name: "導入の流れ" },
+    { name: "料金", onClick: () => goTo("/price") },
+    { name: "導入の流れ", onClick: () => goTo("/introduction") },
     { name: "テンプレート一覧", onClick: () => goTo("/temple") },
     { name: "お問い合わせ", onClick: () => goTo("/contact") },
   ];
 
+  // メニューオープン時はスクロール防止
   useEffect(() => {
     if (isOpen) {
-      // メニューが開いている時はスクロールを無効化
       document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = "var(--scrollbar-width)"; // スクロールバーの幅分のパディングを追加
+      document.body.style.paddingRight = "var(--scrollbar-width)";
     } else {
-      // メニューが閉じている時はスクロールを有効化
       document.body.style.overflow = "unset";
       document.body.style.paddingRight = "0";
     }
-
-    // クリーンアップ関数
     return () => {
       document.body.style.overflow = "unset";
       document.body.style.paddingRight = "0";
@@ -39,41 +40,104 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
 
   return (
     <div
-      className={`lg:hidden fixed inset-x-0 top-0 bg-white z-50 transition-all duration-300 ease-in-out ${
-        isOpen
-          ? "max-h-96 opacity-100 py-4"
-          : "max-h-0 opacity-0 overflow-hidden"
+      className={`fixed inset-0 z-50 ${
+        isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}
     >
-      <div className="container mx-auto px-4">
-        {/* 閉じるボタン */}
-        <div className="flex justify-end mb-4">
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-            aria-label="メニューを閉じる"
-          >
-            <X className="w-6 h-6 text-gray-600" />
-          </button>
-        </div>
-
-        {/* メニュー項目 */}
-        <nav className="flex flex-col space-y-4 pb-6">
-          {menuItems.map((item, index) => (
+      {/* 背景のオーバーレイ */}
+      <div
+        className={`absolute inset-0 bg-black transition-opacity duration-500 ${
+          isOpen ? "opacity-50" : "opacity-0"
+        }`}
+        onClick={onClose}
+      />
+      {/* 左側からスライドインするメニューパネル */}
+      <div
+        className={`absolute top-0 left-0 h-full w-3/4 max-w-xs bg-gray-900 transform transition-transform duration-500 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {/* 全体のパディングは0にして、必要なところだけパディングをつける */}
+        <div className="flex flex-col h-full p-0">
+          {/* 上部：ロゴ & Xボタン（左右に余白を確保したいので px-4） */}
+          <div className="flex items-center justify-between px-4 py-4">
+            <Image
+              src={logowhite}
+              alt="byPay"
+              className="h-12 w-auto"
+              priority
+            />
             <button
-              key={index}
-              className="text-gray-600 hover:text-blue-600 transition-colors px-2 py-1 rounded-lg hover:bg-blue-50"
-              onClick={() => {
-                if (item.onClick) item.onClick();
-                onClose();
-              }}
+              onClick={onClose}
+              className="text-white"
+              aria-label="メニューを閉じる"
             >
-              {item.name}
+              <X className="w-10 h-10" />
             </button>
-          ))}
-        </nav>
+          </div>
+
+          {/* ナビゲーションメニュー（同じpx-4で左端をそろえる） */}
+          <nav className="mt-4 px-4">
+            {menuItems.map((item, index) => (
+              <div key={index} className="mb-6">
+                <button
+                  onClick={() => {
+                    item.onClick();
+                    onClose();
+                  }}
+                  className="text-2xl text-gray-300 hover:text-white transition-colors duration-300 w-full text-left"
+                >
+                  {item.name}
+                </button>
+              </div>
+            ))}
+          </nav>
+
+          {/* 下部のソーシャルアイコン （ここもpx-4で同じ左端に） */}
+          <div className="flex space-x-6 px-4 mt-auto pb-4">
+            <a
+              href="https://www.instagram.com/bypay_official"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <AiFillInstagram className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
+            </a>
+            <a
+              href="https://x.com/byPay_official"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (Twitter)"
+            >
+              <FaSquareXTwitter className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
+  );
+};
+
+export const CurtainMenuPage = () => {
+  const [open, setOpen] = useState(false);
+  const toggle = () => setOpen((prev) => !prev);
+
+  return (
+    <>
+      {/* ハンバーガーメニューのトグルボタン */}
+      <button
+        onClick={toggle}
+        className="text-white focus:outline-none m-4"
+        aria-label="メニューを開く"
+      >
+        <Menu className="w-8 h-8" />
+      </button>
+      <MobileMenu
+        isOpen={open}
+        onClose={toggle}
+        goTo={(path) => console.log(`Navigating to ${path}`)}
+      />
+    </>
   );
 };
 

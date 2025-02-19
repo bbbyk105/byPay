@@ -1,5 +1,7 @@
 import { CreditCard } from "lucide-react";
 import CardBrands from "./card-brands";
+import Image from "next/image";
+import logo from "@/public/logos/logo.png";
 
 const PaymentForm = () => {
   return (
@@ -7,10 +9,7 @@ const PaymentForm = () => {
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
-              B
-            </div>
-            <span className="font-bold text-gray-800">byPay 決済</span>
+            <Image src={logo} alt="byPay Logo" width={100} height={150} />
           </div>
           <span className="text-gray-600">¥2,500</span>
         </div>
