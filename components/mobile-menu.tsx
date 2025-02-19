@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
+import { AiFillInstagram } from "react-icons/ai";
+import { FaSquareXTwitter } from "react-icons/fa6";
 import Image from "next/image";
 import logowhite from "@/public/logos/logo-white.png";
 
@@ -39,7 +40,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
 
   return (
     <div
-      className={`fixed inset-0  ${
+      className={`fixed inset-0 z-50 ${
         isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}
     >
@@ -52,17 +53,18 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
       />
       {/* 左側からスライドインするメニューパネル */}
       <div
-        className={`absolute top-0 left-0 h-full w-3/4 max-w-xs bg-gray-900 p-6 transform transition-transform duration-500 ${
+        className={`absolute top-0 left-0 h-full w-3/4 max-w-xs bg-gray-900 transform transition-transform duration-500 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex flex-col h-full justify-between">
-          {/* --- 上部：ロゴ & Xボタンを同じ高さで横並び --- */}
-          <div className="flex items-center justify-between">
+        {/* 全体のパディングは0にして、必要なところだけパディングをつける */}
+        <div className="flex flex-col h-full p-0">
+          {/* 上部：ロゴ & Xボタン（左右に余白を確保したいので px-4） */}
+          <div className="flex items-center justify-between px-4 py-4">
             <Image
               src={logowhite}
               alt="byPay"
-              className="h-10 w-auto mr-auto"
+              className="h-12 w-auto"
               priority
             />
             <button
@@ -70,12 +72,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
               className="text-white"
               aria-label="メニューを閉じる"
             >
-              <X className="w-10 h-10" /> {/* バツボタンも高さ10 */}
+              <X className="w-10 h-10" />
             </button>
           </div>
 
-          {/* --- ナビゲーションメニュー --- */}
-          <nav className="mt-12">
+          {/* ナビゲーションメニュー（同じpx-4で左端をそろえる） */}
+          <nav className="mt-4 px-4">
             {menuItems.map((item, index) => (
               <div key={index} className="mb-6">
                 <button
@@ -91,10 +93,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
             ))}
           </nav>
 
-          {/* --- 下部：SNSアイコンも高さ10で揃える --- */}
-          <div className="flex space-x-6">
+          {/* 下部のソーシャルアイコン （ここもpx-4で同じ左端に） */}
+          <div className="flex space-x-6 px-4 mt-auto pb-4">
             <a
-              href="https://www.instagram.com/your-profile"
+              href="https://www.instagram.com/bypay_official"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -102,12 +104,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
               <AiFillInstagram className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
             </a>
             <a
-              href="https://x.com/your-profile"
+              href="https://x.com/byPay_official"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="X (Twitter)"
             >
-              <AiOutlineTwitter className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
+              <FaSquareXTwitter className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
             </a>
           </div>
         </div>
