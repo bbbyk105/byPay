@@ -26,26 +26,33 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
   useEffect(() => {
     if (isOpen) {
       const scrollY = window.scrollY;
-      // スクロールバーの幅を計算
       const scrollbarWidth =
         window.innerWidth - document.documentElement.clientWidth;
 
-      // bodyに現在のスクロール位置を記憶させる
+      // 現在のスクロール位置を保存
+      document.body.dataset.scrollY = String(scrollY);
+
+      // スクロールを固定
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = "100%";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
     } else {
-      // 保存していたスクロール位置を復元
-      const scrollY = document.body.style.top;
+      // 保存していたスクロール位置を取得
+      const savedScrollY = parseInt(document.body.dataset.scrollY || "0", 10);
+
+      // スクロールを復元
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
       document.body.style.paddingRight = "";
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+
+      // スクロール位置を戻す
+      window.scrollTo(0, savedScrollY);
     }
 
     return () => {
+      // Cleanup処理（isOpenがfalseのときに不要なリセットを防ぐ）
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
