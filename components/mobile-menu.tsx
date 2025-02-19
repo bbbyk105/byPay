@@ -1,9 +1,10 @@
-// mobile-menu.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
+import Image from "next/image";
+import logowhite from "@/public/logos/logo-white.png";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -37,9 +38,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
   }, [isOpen]);
 
   return (
-    // isOpen のときのみ pointer-events を有効にする
     <div
-      className={`fixed inset-0 z-50 ${
+      className={`fixed inset-0  ${
         isOpen ? "pointer-events-auto" : "pointer-events-none"
       }`}
     >
@@ -49,7 +49,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
           isOpen ? "opacity-50" : "opacity-0"
         }`}
         onClick={onClose}
-      ></div>
+      />
       {/* 左側からスライドインするメニューパネル */}
       <div
         className={`absolute top-0 left-0 h-full w-3/4 max-w-xs bg-gray-900 p-6 transform transition-transform duration-500 ${
@@ -57,17 +57,24 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
         }`}
       >
         <div className="flex flex-col h-full justify-between">
-          {/* ヘッダー：クローズボタン */}
-          <div className="relative">
+          {/* --- 上部：ロゴ & Xボタンを同じ高さで横並び --- */}
+          <div className="flex items-center justify-between">
+            <Image
+              src={logowhite}
+              alt="byPay"
+              className="h-10 w-auto mr-auto"
+              priority
+            />
             <button
               onClick={onClose}
-              className="absolute top-0 right-0 text-white"
+              className="text-white"
               aria-label="メニューを閉じる"
             >
-              <X className="w-8 h-8" />
+              <X className="w-10 h-10" /> {/* バツボタンも高さ10 */}
             </button>
           </div>
-          {/* ナビゲーションメニュー */}
+
+          {/* --- ナビゲーションメニュー --- */}
           <nav className="mt-12">
             {menuItems.map((item, index) => (
               <div key={index} className="mb-6">
@@ -83,7 +90,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
               </div>
             ))}
           </nav>
-          {/* 下部のソーシャルアイコン */}
+
+          {/* --- 下部：SNSアイコンも高さ10で揃える --- */}
           <div className="flex space-x-6">
             <a
               href="https://www.instagram.com/your-profile"
@@ -91,7 +99,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
               rel="noopener noreferrer"
               aria-label="Instagram"
             >
-              <AiFillInstagram className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-300" />
+              <AiFillInstagram className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
             </a>
             <a
               href="https://x.com/your-profile"
@@ -99,7 +107,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
               rel="noopener noreferrer"
               aria-label="X (Twitter)"
             >
-              <AiOutlineTwitter className="w-8 h-8 text-white hover:text-gray-300 transition-colors duration-300" />
+              <AiOutlineTwitter className="w-10 h-10 text-white hover:text-gray-300 transition-colors duration-300" />
             </a>
           </div>
         </div>

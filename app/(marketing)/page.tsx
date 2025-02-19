@@ -32,7 +32,7 @@ const LandingPage = () => {
                 <br />
                 決済をもっとカンタンに
               </h1>
-              <p className="text-sm mb-8">
+              <p className="text-sm md:text-xl mb-8">
                 月額費用0円、最短即日導入 <br />
                 キャッシュレス決済を即実現 <br />
                 サイトは自由にカスタマイズ可能
