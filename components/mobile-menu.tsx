@@ -46,7 +46,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, goTo }) => {
     >
       {/* 背景のオーバーレイ */}
       <div
-        className={`absolute inset-0 bg-black transition-opacity duration-500 ${
+        className={`absolute inset-0 bg-black transition-opacity duration-500 z-[1000000] ${
           isOpen ? "opacity-50" : "opacity-0"
         }`}
         onClick={onClose}
