@@ -3,19 +3,18 @@ import type { Metadata } from "next";
 export const siteMetadata: Metadata = {
   title: "byPay | マルシェ・展示会向けキャッシュレス決済",
   description:
-    "マルシェや展示会出店者向けのキャッシュレス決済＆ECツール。Stripe連携により、即日導入可能な低コスト・シンプルな決済環境で、在庫管理や売上集計もスムーズに実現します。",
+    "マルシェや展示会の出店者向けキャッシュレス決済＆ECツール。Stripe連携で即日導入、低コストで簡単に売上管理や在庫管理が可能。",
   keywords: [
-    "マルシェ キャッシュレス決済",
+    "マルシェ 決済",
     "展示会 キャッシュレス",
-    "イベント即日決済",
     "Stripe イベント決済",
-    "ECツール マルシェ",
-    "物販 在庫管理 キャッシュレス",
+    "物販 在庫管理",
   ],
-  authors: [{ name: "byPay" }],
+  authors: [{ name: "byPay", url: "https://by-pay.vercel.app/" }],
   openGraph: {
     title: "byPay | マルシェ・展示会向けキャッシュレス決済",
-    description: "マルシェや展示会の決済をもっと簡単に！",
+    description:
+      "マルシェや展示会の出店者向けキャッシュレス決済＆ECツール。Stripe連携で即日導入、低コストで簡単に売上管理や在庫管理が可能。",
     url: "https://by-pay.vercel.app/",
     images: [
       {
@@ -30,8 +29,11 @@ export const siteMetadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "byPay | マルシェ・展示会向けキャッシュレス決済",
-    description: "マルシェや展示会の決済をもっと簡単に！",
+    description:
+      "マルシェや展示会の出店者向けキャッシュレス決済＆ECツール。Stripe連携で即日導入、低コストで簡単に売上管理や在庫管理が可能。",
     images: ["/logos/logo.png"],
   },
-  metadataBase: new URL("https://by-pay.vercel.app/"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://by-pay.vercel.app/"
+  ),
 };
