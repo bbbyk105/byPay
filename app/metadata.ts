@@ -36,4 +36,7 @@ export const siteMetadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://by-pay.vercel.app/"
   ),
+  verification: {
+    google: "qoPQtZon85TAW7culeNCMVvlde6MFqE3qJ2Bjzif44I",
+  },
 };
